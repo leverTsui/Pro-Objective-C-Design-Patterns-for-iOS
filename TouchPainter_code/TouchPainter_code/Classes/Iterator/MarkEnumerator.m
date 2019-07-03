@@ -17,23 +17,20 @@
 
 @implementation MarkEnumerator
 
-- (NSArray *)allObjects
-{
+- (NSArray *)allObjects {
   // returns an array of yet-visited Mark nodes
   // i.e. the remaining elements in the stack
   return [[self.stack reverseObjectEnumerator] allObjects];
 }
 
-- (id)nextObject
-{
+- (id)nextObject {
   return [self.stack pop];
 } 
 
 #pragma mark -
 #pragma mark Private Methods
 
-- (id) initWithMark:(id <Mark>)aMark
-{
+- (id)initWithMark:(id <Mark>)aMark {
   if (self = [super init])
   {
     self.stack = [[NSMutableArray alloc] initWithCapacity:[aMark count]];
@@ -56,8 +53,7 @@
   
   NSUInteger index = [mark count];
   id <Mark> childMark;
-  while (childMark = [mark childMarkAtIndex:--index]) 
-  {
+  while (childMark = [mark childMarkAtIndex:--index]) {
     [self traverseAndBuildStackWithMark:childMark];
   }
 }

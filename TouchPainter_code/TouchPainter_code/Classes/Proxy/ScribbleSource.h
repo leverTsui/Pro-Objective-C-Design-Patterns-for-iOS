@@ -9,8 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "Scribble.h"
 
-@protocol ScribbleSource
+@protocol ScribbleSource <NSObject>
 
-- (Scribble *) scribble;
+- (Scribble *)scribble;
 
 @end

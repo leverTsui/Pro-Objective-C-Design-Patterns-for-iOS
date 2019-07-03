@@ -11,14 +11,12 @@
 
 @implementation NSMutableArray (Stack)
 
-- (void) push:(id)object
-{
+- (void)push:(id)object {
   if (object != nil)
     [self addObject:object];
 }
 
-- (id) pop
-{
+- (id)pop {
   if ([self count] == 0) return nil;
   
   id object = [self lastObject];
@@ -27,8 +25,7 @@
   return object;
 }
 
-- (void) dropBottom
-{
+- (void)dropBottom {
   if ([self count] == 0) return;
   
   [self removeObjectAtIndex:0];

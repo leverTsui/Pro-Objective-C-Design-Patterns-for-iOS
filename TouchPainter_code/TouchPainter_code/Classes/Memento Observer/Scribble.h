@@ -11,11 +11,6 @@
 #import "ScribbleMemento.h"
 
 @interface Scribble : NSObject
-{
-  @private
-  id <Mark> parentMark_;
-  id <Mark> incrementalMark_;
-}
 
 // methods for Mark management
 - (void) addMark:(id <Mark>)aMark shouldAddToPreviousMark:(BOOL)shouldAddToPreviousMark;

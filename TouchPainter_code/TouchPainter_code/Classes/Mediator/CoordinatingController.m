@@ -10,35 +10,30 @@
 
 @interface CoordinatingController ()
 
-@property (nonatomic, strong) UIViewController *activeViewController;
-
 @property (nonatomic, strong) CanvasViewController *canvasViewController;
 
 @end
 
 @implementation CoordinatingController
 
-- (instancetype)init {
-    self = [super init];
-    if (self) {
-        self.canvasViewController = [[CanvasViewController alloc] init];
-        self.activeViewController = self.canvasViewController;
-    }
-    return self;
-}
+#pragma mark - life cycle
 
-#pragma mark -
-#pragma mark CoordinatingController Singleton Implementation
-
-+ (instancetype)sharedInstance
-{
++ (instancetype)sharedInstance {
     static dispatch_once_t onceToken;
     static CoordinatingController *sharedCoordinator;
     dispatch_once(&onceToken, ^{
         sharedCoordinator = [[CoordinatingController alloc] init];
     });
     return sharedCoordinator;
-} 
+}
+
+- (instancetype)init {
+    self = [super init];
+    if (self) {
+        self.canvasViewController = [[CanvasViewController alloc] init];
+    }
+    return self;
+}
 
 #pragma mark -
 #pragma mark A method for view transitions
@@ -54,11 +49,7 @@
         
         // transition to the PaletteViewController
         [self.canvasViewController presentModalViewController:controller
-                                                     animated:YES];
-        
-        // set the activeViewController to 
-        // paletteViewController
-        self.activeViewController = controller;
+                                                     animated:YES]; 
       }
         break;
       case kButtonTagOpenThumbnailView:
@@ -70,10 +61,6 @@
         // transition to the ThumbnailViewController
         [self.canvasViewController presentModalViewController:controller
                                                       animated:YES];
-        
-        // set the activeViewController to
-        // ThumbnailViewController
-        self.activeViewController = controller;
       }
         break;
       default:
@@ -87,10 +74,6 @@
         // conjunction with the design
         // other objects will follow the same path
         [self.canvasViewController dismissModalViewControllerAnimated:YES];
-        
-        // set the activeViewController back to 
-        // canvasViewController
-        self.activeViewController = self.canvasViewController;
       }
         break;
     }
@@ -99,10 +82,6 @@
   else 
   {
     [self.canvasViewController dismissModalViewControllerAnimated:YES];
-    
-    // set the activeViewController back to 
-    // canvasViewController
-    self.activeViewController = self.canvasViewController;
   }
   
 }

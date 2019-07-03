@@ -12,9 +12,10 @@
 
 @interface ScribbleMemento ()
 
-- (id) initWithMark:(id <Mark>)aMark;
+- (id)initWithMark:(id <Mark>)aMark;
 
-@property (nonatomic, copy) id <Mark> mark;
+@property (nonatomic, strong) id <Mark> mark;
+
 @property (nonatomic, assign) BOOL hasCompleteSnapshot;
 
 @end

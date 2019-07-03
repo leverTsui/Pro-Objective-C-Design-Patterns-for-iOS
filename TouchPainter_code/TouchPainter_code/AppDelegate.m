@@ -23,7 +23,7 @@
     
     
     CoordinatingController *coordinatingController = [CoordinatingController sharedInstance];
-    UIViewController *viewController = [coordinatingController activeViewController];
+    UIViewController *viewController = [coordinatingController canvasViewController];
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:viewController];
     self.window.rootViewController = navigationController;
     

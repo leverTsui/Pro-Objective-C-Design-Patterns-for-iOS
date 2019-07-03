@@ -9,10 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "Command.h"
 
-@interface SaveScribbleCommand : Command 
-{
-
-}
+@interface SaveScribbleCommand : Command  
 
 - (void) execute;
 

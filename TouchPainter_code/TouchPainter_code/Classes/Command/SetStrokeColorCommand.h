@@ -15,14 +15,14 @@ typedef void (^PostColorUpdateProvider)(UIColor *color);
 
 @class SetStrokeColorCommand;
 
-@protocol SetStrokeColorCommandDelegate
+@protocol SetStrokeColorCommandDelegate <NSObject>
 
-- (void) command:(SetStrokeColorCommand *) command 
+- (void)command:(SetStrokeColorCommand *)command
                 didRequestColorComponentsForRed:(CGFloat *) red
                                           green:(CGFloat *) green 
                                            blue:(CGFloat *) blue;
 
-- (void) command:(SetStrokeColorCommand *) command
+- (void)command:(SetStrokeColorCommand *)command
                 didFinishColorUpdateWithColor:(UIColor *) color;
 
 @end
@@ -30,10 +30,12 @@ typedef void (^PostColorUpdateProvider)(UIColor *color);
 
 @interface SetStrokeColorCommand : Command
 
-@property (nonatomic, weak) id <SetStrokeColorCommandDelegate> delegate;
+@property (nonatomic, weak) id<SetStrokeColorCommandDelegate> delegate;
+
 @property (nonatomic, copy) RGBValuesProvider RGBValuesProvider;
+
 @property (nonatomic, copy) PostColorUpdateProvider postColorUpdateProvider;
 
-- (void) execute;
+- (void)execute;
 
 @end

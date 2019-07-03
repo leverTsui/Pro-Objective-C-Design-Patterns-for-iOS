@@ -8,10 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-
-@interface PrototypeController : UIViewController 
-{
-
-}
+@interface PrototypeController : UIViewController
 
 @end

@@ -11,7 +11,9 @@
 // A private category for a forward loading thread 
 @interface ScribbleThumbnailViewImageProxy () 
 
-- (void) forwardImageLoadingThread;
+@property (nonatomic, assign) BOOL loadingThreadHasLaunched;
+
+@property (nonatomic, strong) UIImage *realImage; 
 
 @end
 
@@ -19,22 +21,19 @@
 
 @implementation ScribbleThumbnailViewImageProxy
 
-@synthesize touchCommand=touchCommand_;
 @dynamic imagePath;
 @dynamic scribblePath;
 
 
-- (Scribble *) scribble
-{
-  if (scribble_ == nil)
-  {
+- (Scribble *)scribble {
+  if (_scribble == nil) {
     NSFileManager *fileManager = [NSFileManager defaultManager];
-    NSData *scribbleData = [fileManager contentsAtPath:scribblePath_];
+    NSData *scribbleData = [fileManager contentsAtPath:self.scribblePath];
     ScribbleMemento *scribbleMemento = [ScribbleMemento mementoWithData:scribbleData];
-    scribble_ = [Scribble scribbleWithMemento:scribbleMemento];
+    _scribble = [Scribble scribbleWithMemento:scribbleMemento];
   }
   
-  return scribble_;
+  return _scribble;
 }
 
 
@@ -42,14 +41,12 @@
 // to forward-load a real image
 // if there is no need to show this object
 // on a view.
-- (UIImage *) image
-{
-  if (realImage_ == nil)
-  {
-    realImage_ = [[UIImage alloc] initWithContentsOfFile:imagePath_];
+- (UIImage *)image {
+  if (self.realImage == nil) {
+    self.realImage = [[UIImage alloc] initWithContentsOfFile:self.imagePath];
   }
   
-  return realImage_;
+  return self.realImage;
 }
 
 
@@ -67,7 +64,7 @@
   // from realImageView_,
   // then just draw a blank frame
   // as a placeholder image
-  if (realImage_ == nil)
+  if (self.realImage == nil)
   {
     // Drawing code
     CGContextRef context = UIGraphicsGetCurrentContext();
@@ -86,11 +83,11 @@
     
     // launch a thread to load the real
     // payload if it hasn't done yet
-    if (!loadingThreadHasLaunched_)
+    if (!self.loadingThreadHasLaunched)
     {
       [self performSelectorInBackground:@selector(forwardImageLoadingThread) 
                              withObject:nil];
-      loadingThreadHasLaunched_ = YES;
+      self.loadingThreadHasLaunched = YES;
     }
   }
   // otherwise pass the draw*: message
@@ -98,15 +95,14 @@
   // draw the real image
   else 
   {
-    [realImage_ drawInRect:rect];
+    [self.realImage drawInRect:rect];
   }
 }
 
 #pragma mark Touch event handlers
 
-- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
-{
-  [touchCommand_ execute];
+- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
+  [self.touchCommand execute];
 }
 
 

@@ -10,11 +10,8 @@
 #import "CanvasViewGenerator.h"
 #import "PaperCanvasView.h"
 
-@interface PaperCanvasViewGenerator : CanvasViewGenerator 
-{
+@interface PaperCanvasViewGenerator : CanvasViewGenerator  
 
-}
-
-- (CanvasView *) canvasViewWithFrame:(CGRect) aFrame;
+- (CanvasView *)canvasViewWithFrame:(CGRect) aFrame;
 
 @end

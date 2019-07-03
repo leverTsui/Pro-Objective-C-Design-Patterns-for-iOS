@@ -11,6 +11,6 @@
 
 @interface DeleteScribbleCommand : Command 
 
-- (void) execute;
+- (void)execute;
 
 @end

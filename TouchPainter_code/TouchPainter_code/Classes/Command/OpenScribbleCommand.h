@@ -10,15 +10,12 @@
 #import "Command.h"
 #import "ScribbleSource.h"
 
-@interface OpenScribbleCommand : Command 
-{
-  @private
-  id <ScribbleSource> scribbleSource_;
-}
+@interface OpenScribbleCommand : Command
 
-@property (nonatomic, retain) id <ScribbleSource> scribbleSource;
+@property (nonatomic, strong) id <ScribbleSource> scribbleSource;
 
-- (id) initWithScribbleSource:(id <ScribbleSource>) aScribbleSource;
-- (void) execute;
+- (id)initWithScribbleSource:(id <ScribbleSource>) aScribbleSource;
+
+- (void)execute;
 
 @end

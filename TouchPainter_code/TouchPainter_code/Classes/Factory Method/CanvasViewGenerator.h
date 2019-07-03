@@ -13,5 +13,4 @@
 
 - (CanvasView *)canvasViewWithFrame:(CGRect) aFrame;
 
-
 @end

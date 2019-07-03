@@ -14,5 +14,4 @@
 	return [[ClothCanvasView alloc] initWithFrame:aFrame];
 }
 
-
 @end

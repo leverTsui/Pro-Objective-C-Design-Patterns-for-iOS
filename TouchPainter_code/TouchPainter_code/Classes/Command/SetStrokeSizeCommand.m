@@ -12,26 +12,25 @@
 
 @implementation SetStrokeSizeCommand
 
-@synthesize delegate=delegate_;
+- (void)execute {
+    // get the current stroke size
+    // from whatever it's my delegate
+    CGFloat strokeSize = 1;
+    if (self.delegate && [self.delegate respondsToSelector:@selector(command:didRequestForStrokeSize:)]) {
+        [self.delegate command:self didRequestForStrokeSize:&strokeSize];
+    }
 
-- (void) execute
-{
-  // get the current stroke size
-  // from whatever it's my delegate
-  CGFloat strokeSize = 1;
-  [delegate_ command:self didRequestForStrokeSize:&strokeSize];
-  
-  // get a hold of the current
-  // canvasViewController from
-  // the coordinatingController
-  // (see the Mediator pattern chapter
-  // for details)
-  CoordinatingController *coordinator = [CoordinatingController sharedInstance];
-  CanvasViewController *controller = [coordinator canvasViewController];
-  
-  // assign the stroke size to
-  // the canvasViewController
-  [controller setStrokeSize:strokeSize];
+    // get a hold of the current
+    // canvasViewController from
+    // the coordinatingController
+    // (see the Mediator pattern chapter
+    // for details)
+    CoordinatingController *coordinator = [CoordinatingController sharedInstance];
+    CanvasViewController *controller = [coordinator canvasViewController];
+
+    // assign the stroke size to
+    // the canvasViewController
+    [controller setStrokeSize:strokeSize];
 }
 
 @end

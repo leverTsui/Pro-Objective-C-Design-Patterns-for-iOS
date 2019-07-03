@@ -12,9 +12,9 @@
 
 @class SetStrokeSizeCommand;
 
-@protocol SetStrokeSizeCommandDelegate
+@protocol SetStrokeSizeCommandDelegate <NSObject>
 
-- (void) command:(SetStrokeSizeCommand *)command 
+- (void)command:(SetStrokeSizeCommand *)command 
                 didRequestForStrokeSize:(CGFloat *)size;
 
 @end
@@ -22,8 +22,8 @@
 
 @interface SetStrokeSizeCommand : Command
 
-@property (nonatomic, weak) id <SetStrokeSizeCommandDelegate> delegate;
+@property (nonatomic, weak) id<SetStrokeSizeCommandDelegate> delegate;
 
-- (void) execute;
+- (void)execute;
 
 @end

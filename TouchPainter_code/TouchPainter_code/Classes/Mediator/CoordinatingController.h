@@ -18,9 +18,8 @@ typedef enum
   kButtonTagOpenThumbnailView
 } ButtonTag;
 
-@interface CoordinatingController : NSObject 
+@interface CoordinatingController : NSObject
 
-@property (nonatomic, strong, readonly) UIViewController *activeViewController;
 @property (nonatomic, strong, readonly) CanvasViewController *canvasViewController;
 
 + (CoordinatingController *) sharedInstance;

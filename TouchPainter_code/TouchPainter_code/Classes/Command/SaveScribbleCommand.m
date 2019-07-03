@@ -13,8 +13,7 @@
 
 @implementation SaveScribbleCommand
 
-- (void) execute
-{
+- (void)execute {
   // get a hold of all necessary information
   // from an instance of CanvasViewController
   // for saving its Scribble

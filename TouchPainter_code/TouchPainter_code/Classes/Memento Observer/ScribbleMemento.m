@@ -11,17 +11,12 @@
 
 @implementation ScribbleMemento
 
-@synthesize mark=mark_;
-@synthesize hasCompleteSnapshot=hasCompleteSnapshot_;
-
-- (NSData *) data
-{
-  NSData *data = [NSKeyedArchiver archivedDataWithRootObject:mark_];
+- (NSData *)data {
+  NSData *data = [NSKeyedArchiver archivedDataWithRootObject:self.mark];
   return data;
 }
 
-+ (ScribbleMemento *) mementoWithData:(NSData *)data
-{
++ (ScribbleMemento *)mementoWithData:(NSData *)data {
   // It raises an NSInvalidArchiveOperationException if data is not a valid archive
   id <Mark> retoredMark = (id <Mark>)[NSKeyedUnarchiver unarchiveObjectWithData:data];
   ScribbleMemento *memento = [[ScribbleMemento alloc] initWithMark:retoredMark];
@@ -32,11 +27,9 @@
 #pragma mark -
 #pragma mark Private methods
 
-- (id) initWithMark:(id <Mark>)aMark
-{
-  if (self = [super init])
-  {
-    [self setMark:aMark];
+- (id)initWithMark:(id <Mark>)aMark {
+  if (self = [super init]) {
+      self.mark = aMark; 
   }
   
   return self;

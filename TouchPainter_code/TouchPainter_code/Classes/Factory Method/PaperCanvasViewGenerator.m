@@ -8,7 +8,6 @@
 
 #import "PaperCanvasViewGenerator.h"
 
-
 @implementation PaperCanvasViewGenerator
 
 - (CanvasView *)canvasViewWithFrame:(CGRect)aFrame {

@@ -8,12 +8,12 @@
 
 #import <Foundation/Foundation.h>
 
-
 @interface Command : NSObject 
 
 @property (nonatomic, strong) NSDictionary *userInfo;
 
-- (void) execute;
-- (void) undo;
+- (void)execute;
+
+- (void)undo;
 
 @end

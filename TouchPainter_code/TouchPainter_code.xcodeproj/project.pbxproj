@@ -19,7 +19,6 @@
 		E5792FD422CC5E34008DAC8F /* Stroke.m in Sources */ = {isa = PBXBuildFile; fileRef = E5792F8322CC5E34008DAC8F /* Stroke.m */; };
 		E5792FD522CC5E34008DAC8F /* PrototypeController.m in Sources */ = {isa = PBXBuildFile; fileRef = E5792F8422CC5E34008DAC8F /* PrototypeController.m */; };
 		E5792FD622CC5E34008DAC8F /* ScribbleThumbnailViewImageProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = E5792F8922CC5E34008DAC8F /* ScribbleThumbnailViewImageProxy.m */; };
-		E5792FD722CC5E34008DAC8F /* ScribbleThumbnailView.m in Sources */ = {isa = PBXBuildFile; fileRef = E5792F8A22CC5E34008DAC8F /* ScribbleThumbnailView.m */; };
 		E5792FD822CC5E34008DAC8F /* PaletteViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E5792F8C22CC5E34008DAC8F /* PaletteViewController.xib */; };
 		E5792FD922CC5E34008DAC8F /* ThumbnailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E5792F8D22CC5E34008DAC8F /* ThumbnailViewController.m */; };
 		E5792FDA22CC5E34008DAC8F /* CanvasViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E5792F8E22CC5E34008DAC8F /* CanvasViewController.m */; };
@@ -93,11 +92,9 @@
 		E5792F8222CC5E34008DAC8F /* Dot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Dot.h; sourceTree = "<group>"; };
 		E5792F8322CC5E34008DAC8F /* Stroke.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Stroke.m; sourceTree = "<group>"; };
 		E5792F8422CC5E34008DAC8F /* PrototypeController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrototypeController.m; sourceTree = "<group>"; };
-		E5792F8622CC5E34008DAC8F /* ScribbleThumbnailView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScribbleThumbnailView.h; sourceTree = "<group>"; };
 		E5792F8722CC5E34008DAC8F /* ScribbleThumbnailViewImageProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScribbleThumbnailViewImageProxy.h; sourceTree = "<group>"; };
 		E5792F8822CC5E34008DAC8F /* ScribbleSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScribbleSource.h; sourceTree = "<group>"; };
 		E5792F8922CC5E34008DAC8F /* ScribbleThumbnailViewImageProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScribbleThumbnailViewImageProxy.m; sourceTree = "<group>"; };
-		E5792F8A22CC5E34008DAC8F /* ScribbleThumbnailView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScribbleThumbnailView.m; sourceTree = "<group>"; };
 		E5792F8C22CC5E34008DAC8F /* PaletteViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PaletteViewController.xib; sourceTree = "<group>"; };
 		E5792F8D22CC5E34008DAC8F /* ThumbnailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThumbnailViewController.m; sourceTree = "<group>"; };
 		E5792F8E22CC5E34008DAC8F /* CanvasViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CanvasViewController.m; sourceTree = "<group>"; };
@@ -275,8 +272,6 @@
 			isa = PBXGroup;
 			children = (
 				E5792F8822CC5E34008DAC8F /* ScribbleSource.h */,
-				E5792F8622CC5E34008DAC8F /* ScribbleThumbnailView.h */,
-				E5792F8A22CC5E34008DAC8F /* ScribbleThumbnailView.m */,
 				E5792F8722CC5E34008DAC8F /* ScribbleThumbnailViewImageProxy.h */,
 				E5792F8922CC5E34008DAC8F /* ScribbleThumbnailViewImageProxy.m */,
 			);
@@ -340,8 +335,8 @@
 		E5792F9F22CC5E34008DAC8F /* Custom Stack */ = {
 			isa = PBXGroup;
 			children = (
-				E5792FA022CC5E34008DAC8F /* NSMutableArray+Stack.m */,
 				E5792FA122CC5E34008DAC8F /* NSMutableArray+Stack.h */,
+				E5792FA022CC5E34008DAC8F /* NSMutableArray+Stack.m */,
 			);
 			path = "Custom Stack";
 			sourceTree = "<group>";
@@ -570,7 +565,6 @@
 			files = (
 				E5792FDE22CC5E34008DAC8F /* CommandBarButton.m in Sources */,
 				E5792FDD22CC5E34008DAC8F /* PaletteViewController.m in Sources */,
-				E5792FD722CC5E34008DAC8F /* ScribbleThumbnailView.m in Sources */,
 				E5792FE222CC5E34008DAC8F /* MarkEnumerator.m in Sources */,
 				E5792FDA22CC5E34008DAC8F /* CanvasViewController.m in Sources */,
 				E5792FF322CC5E34008DAC8F /* ScribbleManager.m in Sources */,

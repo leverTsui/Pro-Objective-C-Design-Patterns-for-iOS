@@ -9,31 +9,27 @@
 #import "Stroke.h"
 #import "MarkEnumerator+Internal.h"
 
+@interface Stroke ()
+
+@property (nonatomic, strong) NSMutableArray *children;
+
+@end
+
 @implementation Stroke
 
-@synthesize color=color_, size=size_;
-@dynamic location;
-
-- (id) init
-{
+- (id) init {
   if (self = [super init])
   {
-    children_ = [[NSMutableArray alloc] initWithCapacity:5];
+    self.children = [[NSMutableArray alloc] initWithCapacity:5];
   }
   
   return self;
 }
 
-- (void) setLocation:(CGPoint)aPoint
-{
-  // it doesn't set any arbitrary location
-}
-
-- (CGPoint) location
-{
+- (CGPoint)location {
   // return the location of the first child
-  if ([children_ count] > 0) {
-      id <Mark> mark = [children_ objectAtIndex:0];
+  if ([self.children count] > 0) {
+      id <Mark> mark = [self.children objectAtIndex:0];
       return [mark location];
   }
   
@@ -41,54 +37,41 @@
   return CGPointZero;
 }
 
-- (void) addMark:(id <Mark>) mark
-{
-  [children_ addObject:mark];
+- (void)addMark:(id <Mark>)mark {
+  [self.children addObject:mark];
 }
 
-- (void) removeMark:(id <Mark>) mark
-{
+- (void)removeMark:(id <Mark>)mark {
   // if mark is at this level then
   // remove it and return
   // otherwise, let every child
   // search for it
-  if ([children_ containsObject:mark])
-  {
-    [children_ removeObject:mark];
-  }
-  else 
-  {
-    [children_ makeObjectsPerformSelector:@selector(removeMark:)
+  if ([self.children containsObject:mark]) {
+    [self.children removeObject:mark];
+  } else  {
+    [self.children makeObjectsPerformSelector:@selector(removeMark:)
                                withObject:mark];
   }
 }
 
-
-- (id <Mark>) childMarkAtIndex:(NSUInteger) index
-{
-  if (index >= [children_ count]) return nil;
+- (id <Mark>)childMarkAtIndex:(NSUInteger)index {
+  if (index >= [self.children count]) return nil;
   
-  return [children_ objectAtIndex:index];
+  return [self.children objectAtIndex:index];
 }
 
-
 // a convenience method to return the last child
-- (id <Mark>) lastChild
-{
-  return [children_ lastObject];
+- (id <Mark>)lastChild {
+  return [self.children lastObject];
 }
 
 // returns number of children
-- (NSUInteger) count
-{
-  return [children_ count];
+- (NSUInteger)count {
+  return [self.children count];
 }
 
-
-- (void) acceptMarkVisitor:(id <MarkVisitor>)visitor
-{
-  for (id <Mark> dot in children_)
-  {
+- (void)acceptMarkVisitor:(id <MarkVisitor>)visitor {
+  for (id <Mark> dot in self.children) {
     [dot acceptMarkVisitor:visitor];
   }
   
@@ -98,22 +81,20 @@
 #pragma mark -
 #pragma mark NSCopying method
 
-
-- (id)copyWithZone:(NSZone *)zone
-{
+- (id)copyWithZone:(NSZone *)zone {
   Stroke *strokeCopy = [[[self class] allocWithZone:zone] init];
   
   // copy the color
-  [strokeCopy setColor:[UIColor colorWithCGColor:[color_ CGColor]]];
+  [strokeCopy setColor:[UIColor colorWithCGColor:[self.color CGColor]]];
   
   // copy the size
-  [strokeCopy setSize:size_];
+  [strokeCopy setSize:self.size];
   
   // copy the children
-  for (id <Mark> child in children_)
+  for (id <Mark> child in self.children)
   {
     id <Mark> childCopy = [child copy];
-    [strokeCopy addMark:child];
+    [strokeCopy addMark:childCopy];
   }
   
   return strokeCopy;
@@ -122,41 +103,35 @@
 #pragma mark -
 #pragma mark NSCoder methods
 
-- (id)initWithCoder:(NSCoder *)coder
-{
+- (id)initWithCoder:(NSCoder *)coder {
   if (self = [super init])
   {
-    color_ = [coder decodeObjectForKey:@"StrokeColor"];
-    size_ = [coder decodeFloatForKey:@"StrokeSize"];
-    children_ = [coder decodeObjectForKey:@"StrokeChildren"];
+    self.color = [coder decodeObjectForKey:@"StrokeColor"];
+    self.size = [coder decodeFloatForKey:@"StrokeSize"];
+    self.children = [coder decodeObjectForKey:@"StrokeChildren"];
   }
   
   return self;
 }
 
-- (void)encodeWithCoder:(NSCoder *)coder
-{
-  [coder encodeObject:color_ forKey:@"StrokeColor"];
-  [coder encodeFloat:size_ forKey:@"StrokeSize"];
-  [coder encodeObject:children_ forKey:@"StrokeChildren"];
+- (void)encodeWithCoder:(NSCoder *)coder {
+  [coder encodeObject:self.color forKey:@"StrokeColor"];
+  [coder encodeFloat:self.size forKey:@"StrokeSize"];
+  [coder encodeObject:self.children forKey:@"StrokeChildren"];
 }
 
-#pragma mark -
-#pragma mark enumerator methods
+#pragma mark - enumerator methods
 
-- (NSEnumerator *) enumerator
-{
+- (NSEnumerator *) enumerator {
   return [[MarkEnumerator alloc] initWithMark:self];
 }
 
-- (void) enumerateMarksUsingBlock:(void (^)(id <Mark> item, BOOL *stop)) block
-{
+- (void)enumerateMarksUsingBlock:(void (^)(id <Mark> item, BOOL *stop))block {
   BOOL stop = NO;
   
   NSEnumerator *enumerator = [self enumerator];
   
-  for (id <Mark> mark in enumerator)
-  {
+  for (id <Mark> mark in enumerator) {
     block (mark, &stop);
     if (stop)
       break;
@@ -167,12 +142,10 @@
 #pragma mark An Extended Direct-draw Example
 
 // for a direct draw example
-- (void) drawWithContext:(CGContextRef)context
-{
+- (void) drawWithContext:(CGContextRef)context {
   CGContextMoveToPoint(context, self.location.x, self.location.y);
   
-  for (id <Mark> mark in children_)
-  {
+  for (id <Mark> mark in self.children) {
     [mark drawWithContext:context];
   }
   

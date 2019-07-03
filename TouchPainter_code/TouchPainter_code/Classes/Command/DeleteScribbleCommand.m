@@ -12,7 +12,7 @@
 
 @implementation DeleteScribbleCommand
 
-- (void) execute {
+- (void)execute {
   // get a hold of the current
   // CanvasViewController from
   // the CoordinatingController

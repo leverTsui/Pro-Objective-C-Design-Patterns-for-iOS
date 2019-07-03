@@ -10,16 +10,15 @@
 
 @implementation Dot
 
-- (void) acceptMarkVisitor:(id <MarkVisitor>)visitor {
+- (void)acceptMarkVisitor:(id <MarkVisitor>)visitor {
   [visitor visitDot:self];
 }
 
-#pragma mark -
-#pragma mark NSCopying method
+#pragma mark -  NSCopying method
 
 // it needs to be implemented for memento
 - (id)copyWithZone:(NSZone *)zone {
-  Dot *dotCopy = [[[self class] allocWithZone:zone] initWithLocation:location_];
+  Dot *dotCopy = [[[self class] allocWithZone:zone] initWithLocation:self.location];
   
   // copy the color
   [dotCopy setColor:[UIColor colorWithCGColor:[self.color CGColor]]];
@@ -30,14 +29,10 @@
   return dotCopy;
 }
 
+#pragma mark -  NSCoder methods
 
-#pragma mark -
-#pragma mark NSCoder methods
-
-- (id)initWithCoder:(NSCoder *)coder
-{
-  if (self = [super initWithCoder:coder])
-  {
+- (id)initWithCoder:(NSCoder *)coder {
+  if (self = [super initWithCoder:coder]) {
     self.color = [coder decodeObjectForKey:@"DotColor"];
     self.size = [coder decodeFloatForKey:@"DotSize"];
   }
@@ -45,8 +40,7 @@
   return self;
 }
 
-- (void)encodeWithCoder:(NSCoder *)coder
-{
+- (void)encodeWithCoder:(NSCoder *)coder {
   [super encodeWithCoder:coder];
   [coder encodeObject:self.color forKey:@"DotColor"];
   [coder encodeFloat:self.size forKey:@"DotSize"];
@@ -56,8 +50,7 @@
 #pragma mark An Extended Direct-draw Example
 
 // for a direct draw example
-- (void) drawWithContext:(CGContextRef)context
-{
+- (void)drawWithContext:(CGContextRef)context {
   CGFloat x = self.location.x;
   CGFloat y = self.location.y;
   CGFloat frameSize = self.size;

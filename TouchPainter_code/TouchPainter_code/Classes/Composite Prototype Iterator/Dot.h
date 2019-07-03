@@ -17,13 +17,14 @@
 @property (nonatomic, assign) CGFloat size;
 
 // for the Visitor pattern
-- (void) acceptMarkVisitor:(id <MarkVisitor>)visitor;
+- (void)acceptMarkVisitor:(id <MarkVisitor>)visitor;
 
 // for the Prototype pattern
-- (id) copyWithZone:(NSZone *)zone;
+- (id)copyWithZone:(NSZone *)zone;
 
 // for the Memento pattern
 - (id)initWithCoder:(NSCoder *)coder;
+
 - (void)encodeWithCoder:(NSCoder *)coder;
 
 @end

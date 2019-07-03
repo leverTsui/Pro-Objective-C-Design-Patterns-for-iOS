@@ -7,12 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "ScribbleThumbnailView.h"
 
-@interface ScribbleThumbnailCell : UITableViewCell 
-{
-	
-}
+@interface ScribbleThumbnailCell : UITableViewCell  
 
 + (NSInteger) numberOfPlaceHolders;
 - (void) addThumbnailView:(UIView *)thumbnailView 

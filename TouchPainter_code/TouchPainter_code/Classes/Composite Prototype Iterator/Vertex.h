@@ -11,11 +11,7 @@
 
 @protocol MarkVisitor;
 
-@interface Vertex : NSObject <Mark> 
-{
-  @protected
-  CGPoint location_;
-}
+@interface Vertex : NSObject <Mark>  
 
 @property (nonatomic, retain) UIColor *color;
 @property (nonatomic, assign) CGFloat size;
@@ -23,25 +19,29 @@
 @property (nonatomic, readonly) NSUInteger count;
 @property (nonatomic, readonly) id <Mark> lastChild;
 
-- (id) initWithLocation:(CGPoint) location;
-- (void) addMark:(id <Mark>) mark;
-- (void) removeMark:(id <Mark>) mark;
-- (id <Mark>) childMarkAtIndex:(NSUInteger) index;
+- (id)initWithLocation:(CGPoint)location;
+
+- (void)addMark:(id <Mark>)mark;
+
+- (void)removeMark:(id <Mark>)mark;
+
+- (id <Mark>)childMarkAtIndex:(NSUInteger) index;
 
 // for the Visitor pattern
-- (void) acceptMarkVisitor:(id <MarkVisitor>) visitor;
+- (void)acceptMarkVisitor:(id <MarkVisitor>) visitor;
 
 // for the Prototype pattern
-- (id) copyWithZone:(NSZone *)zone;
+- (id)copyWithZone:(NSZone *)zone;
 
 // for the Iterator pattern
-- (NSEnumerator *) enumerator;
+- (NSEnumerator *)enumerator;
 
 // for internal iterator implementation
-- (void) enumerateMarksUsingBlock:(void (^)(id <Mark> item, BOOL *stop)) block;
+- (void)enumerateMarksUsingBlock:(void (^)(id <Mark> item, BOOL *stop)) block;
 
 // for the Memento pattern
 - (id)initWithCoder:(NSCoder *)coder;
+
 - (void)encodeWithCoder:(NSCoder *)coder;
 
 @end

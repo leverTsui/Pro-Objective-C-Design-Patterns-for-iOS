@@ -12,22 +12,17 @@
 
 @implementation OpenScribbleCommand
 
-@synthesize scribbleSource=scribbleSource_;
-
-- (id) initWithScribbleSource:(id <ScribbleSource>) aScribbleSource
-{
-  if (self = [super init])
-  {
-    [self setScribbleSource:aScribbleSource];
+- (id)initWithScribbleSource:(id <ScribbleSource>) aScribbleSource {
+  if (self = [super init]) {
+      self.scribbleSource = aScribbleSource;
   }
   
   return self;
 }
 
-- (void) execute
-{
+- (void)execute {
   // get a scribble from the scribbleSource_
-  Scribble *scribble = [scribbleSource_ scribble];
+  Scribble *scribble = [self.scribbleSource scribble];
   
   // set it to the current CanvasViewController
   CoordinatingController *coordinator = [CoordinatingController sharedInstance];
