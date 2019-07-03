@@ -11,10 +11,7 @@
 
 @protocol MarkVisitor;
 
-@interface Dot : Vertex 
-
-@property (nonatomic, strong) UIColor *color;
-@property (nonatomic, assign) CGFloat size;
+@interface Dot : Vertex  
 
 // for the Visitor pattern
 - (void)acceptMarkVisitor:(id <MarkVisitor>)visitor;

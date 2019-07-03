@@ -106,8 +106,7 @@
   // add the current touch as another vertex to the
   // temp stroke
   CGPoint thisPoint = [[touches anyObject] locationInView:self.canvasView];
-  Vertex *vertex = [[Vertex alloc]
-                     initWithLocation:thisPoint];
+  Vertex *vertex = [[Vertex alloc] initWithLocation:thisPoint];
   
   // we don't need to undo every vertex
   // so we are keeping this
@@ -155,7 +154,6 @@
   self.startPoint = CGPointZero;
 }
 
-
 #pragma mark - Scribble observer method
 
 - (void)observeValueForKeyPath:(NSString *)keyPath
@@ -174,13 +172,8 @@
 #pragma mark -  Draw Scribble Invocation Generation Methods
 
 - (NSInvocation *)drawScribbleInvocation  {
-  NSMethodSignature *executeMethodSignature = [self.scribble
-                                               methodSignatureForSelector:
-                                               @selector(addMark:
-                                                         shouldAddToPreviousMark:)];
-  NSInvocation *drawInvocation = [NSInvocation 
-                                  invocationWithMethodSignature:
-                                  executeMethodSignature];
+  NSMethodSignature *executeMethodSignature = [self.scribble methodSignatureForSelector:@selector(addMark:shouldAddToPreviousMark:)];
+  NSInvocation *drawInvocation = [NSInvocation invocationWithMethodSignature:executeMethodSignature];
   [drawInvocation setTarget:self.scribble];
   [drawInvocation setSelector:@selector(addMark:shouldAddToPreviousMark:)];
   BOOL attachToPreviousMark = NO;
@@ -206,21 +199,14 @@
 
 - (void)executeInvocation:(NSInvocation *)invocation
         withUndoInvocation:(NSInvocation *)undoInvocation {
-  [invocation retainArguments];
-
-  [[self.undoManager prepareWithInvocationTarget:self] 
-   unexecuteInvocation:undoInvocation
-   withRedoInvocation:invocation];
-  
+  [invocation retainArguments]; 
+  [[self.undoManager prepareWithInvocationTarget:self] unexecuteInvocation:undoInvocation withRedoInvocation:invocation];
   [invocation invoke];
 }
 
 - (void)unexecuteInvocation:(NSInvocation *)invocation
           withRedoInvocation:(NSInvocation *)redoInvocation {  
-  [[self.undoManager prepareWithInvocationTarget:self] 
-   executeInvocation:redoInvocation
-   withUndoInvocation:invocation];
-  
+  [[self.undoManager prepareWithInvocationTarget:self] executeInvocation:redoInvocation withUndoInvocation:invocation];
   [invocation invoke];
 }
 
