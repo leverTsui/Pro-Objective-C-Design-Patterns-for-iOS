@@ -9,10 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "CharacterBuilder.h"
 
-@interface StandardCharacterBuilder : CharacterBuilder 
-{
-
-}
+@interface StandardCharacterBuilder : CharacterBuilder  
 
 // overriden methods from the abstract CharacterBuilder
 - (CharacterBuilder *) buildStrength:(float) value;

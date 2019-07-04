@@ -11,27 +11,16 @@
 
 @implementation Character
 
-@synthesize protection=protection_;
-@synthesize power=power_;
-@synthesize strength=strength_;
-@synthesize stamina=stamina_;
-@synthesize intelligence=intelligence_;
-@synthesize agility=agility_;
-@synthesize aggressiveness=aggressiveness_;
-
-- (id) init
-{
-  if (self = [super init])
-  {
-    protection_ = 1.0;
-    power_ = 1.0;
-    strength_ = 1.0;
-    stamina_ = 1.0;
-    intelligence_ = 1.0;
-    agility_ = 1.0;
-    aggressiveness_ = 1.0;
-  }
-  
+- (id)init {
+  if (self = [super init]) {
+    self.protection = 1.0;
+    self.power = 1.0;
+    self.strength = 1.0;
+    self.stamina = 1.0;
+    self.intelligence = 1.0;
+    self.agility = 1.0;
+    self.aggressiveness = 1.0;
+  } 
   return self;
 }
 

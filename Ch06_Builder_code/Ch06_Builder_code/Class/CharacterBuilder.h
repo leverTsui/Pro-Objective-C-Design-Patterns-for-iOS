@@ -9,13 +9,9 @@
 #import <Foundation/Foundation.h>
 #import "Character.h"
 
-@interface CharacterBuilder : NSObject 
-{
-  @protected
-  Character *character_;
-}
+@interface CharacterBuilder : NSObject
 
-@property (nonatomic, readonly) Character *character;
+@property (nonatomic, strong, readonly) Character *character;
 
 - (CharacterBuilder *) buildNewCharacter;
 - (CharacterBuilder *) buildStrength:(float) value;

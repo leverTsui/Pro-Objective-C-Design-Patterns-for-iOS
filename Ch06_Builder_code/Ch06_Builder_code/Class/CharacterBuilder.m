@@ -8,44 +8,47 @@
 
 #import "CharacterBuilder.h"
 
+@interface CharacterBuilder ()
+
+@property (nonatomic, strong) Character *character;
+
+@end
 
 @implementation CharacterBuilder
 
-@synthesize character=character_;
-
 - (CharacterBuilder *)buildNewCharacter {
-  character_ = [[Character alloc] init];
+  self.character = [[Character alloc] init];
   
   return self;
 }
 
 - (CharacterBuilder *) buildStrength:(float) value
 {
-  character_.strength = value;
+  self.character.strength = value;
   return self;
 }
 
 - (CharacterBuilder *) buildStamina:(float) value
 {
-  character_.stamina = value;
+  self.character.stamina = value;
   return self;
 }
 
 - (CharacterBuilder *) buildIntelligence:(float) value
 {
-  character_.intelligence = value;
+  self.character.intelligence = value;
   return self;
 }
 
 - (CharacterBuilder *) buildAgility:(float) value
 {
-  character_.agility = value;
+  self.character.agility = value;
   return self;
 }
 
 - (CharacterBuilder *) buildAggressiveness:(float) value
 {
-  character_.aggressiveness = value;
+  self.character.aggressiveness = value;
   return self;
 }
  
