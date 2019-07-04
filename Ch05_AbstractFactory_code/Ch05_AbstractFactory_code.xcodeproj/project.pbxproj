@@ -175,13 +175,13 @@
 			isa = PBXGroup;
 			children = (
 				E5792E3F22CC4957008DAC8F /* SierraBrandingFactory.h */,
-				E5792E4022CC4957008DAC8F /* SierraView.h */,
-				E5792E4122CC4957008DAC8F /* SierraToolbar.h */,
-				E5792E4222CC4957008DAC8F /* SierraMainButton.m */,
-				E5792E4322CC4957008DAC8F /* SierraToolbar.m */,
 				E5792E4422CC4957008DAC8F /* SierraBrandingFactory.m */,
-				E5792E4522CC4957008DAC8F /* SierraView.m */,
 				E5792E4622CC4957008DAC8F /* SierraMainButton.h */,
+				E5792E4222CC4957008DAC8F /* SierraMainButton.m */,
+				E5792E4122CC4957008DAC8F /* SierraToolbar.h */,
+				E5792E4322CC4957008DAC8F /* SierraToolbar.m */,
+				E5792E4022CC4957008DAC8F /* SierraView.h */,
+				E5792E4522CC4957008DAC8F /* SierraView.m */,
 			);
 			path = Sierra;
 			sourceTree = "<group>";
@@ -189,14 +189,14 @@
 		E5792E4722CC4957008DAC8F /* Acme */ = {
 			isa = PBXGroup;
 			children = (
-				E5792E4822CC4957008DAC8F /* AcmeBrandingFactory.m */,
-				E5792E4922CC4957008DAC8F /* AcmeView.h */,
-				E5792E4A22CC4957008DAC8F /* AcmeMainButton.h */,
-				E5792E4B22CC4957008DAC8F /* AcmeToolbar.h */,
-				E5792E4C22CC4957008DAC8F /* AcmeView.m */,
 				E5792E4D22CC4957008DAC8F /* AcmeBrandingFactory.h */,
-				E5792E4E22CC4957008DAC8F /* AcmeToolbar.m */,
+				E5792E4822CC4957008DAC8F /* AcmeBrandingFactory.m */,
+				E5792E4A22CC4957008DAC8F /* AcmeMainButton.h */,
 				E5792E4F22CC4957008DAC8F /* AcmeMainButton.m */,
+				E5792E4B22CC4957008DAC8F /* AcmeToolbar.h */,
+				E5792E4E22CC4957008DAC8F /* AcmeToolbar.m */,
+				E5792E4922CC4957008DAC8F /* AcmeView.h */,
+				E5792E4C22CC4957008DAC8F /* AcmeView.m */,
 			);
 			path = Acme;
 			sourceTree = "<group>";

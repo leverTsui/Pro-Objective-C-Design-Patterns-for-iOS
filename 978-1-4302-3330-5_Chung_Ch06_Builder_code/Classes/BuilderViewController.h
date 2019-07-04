@@ -8,9 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface BuilderViewController : UIViewController {
-
-}
+@interface BuilderViewController : UIViewController  
 
 @end
 

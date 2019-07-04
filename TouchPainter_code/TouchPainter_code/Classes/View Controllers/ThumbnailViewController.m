@@ -22,30 +22,23 @@
 @implementation ThumbnailViewController
 
 - (void)viewDidLoad  {
-  [super viewDidLoad];
-  
-  // set the table view's background
-  // with a dark cloth texture image
-  UIColor *backgroundColor = [UIColor colorWithPatternImage:
-                              [UIImage imageNamed:@"background_texture"]];
-  [[self view] setBackgroundColor:backgroundColor];
-  
-  // initialize the scribble manager
-  self.scribbleManager = [[ScribbleManager alloc] init];
-  
-  // show number of scribbles available
-  NSInteger numberOfScribbles = [self.scribbleManager numberOfScribbles];
-  [self.navItem setTitle:[NSString stringWithFormat:numberOfScribbles > 1 ? @"%ld items" : @"%ld item", numberOfScribbles]];
+    [super viewDidLoad];
+
+    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"background_texture"]];
+    
+    self.scribbleManager = [[ScribbleManager alloc] init];
+ 
+    NSInteger numberOfScribbles = [self.scribbleManager numberOfScribbles];
+    [self.navItem setTitle:[NSString stringWithFormat:numberOfScribbles > 1 ? @"%ld items" : @"%ld item", numberOfScribbles]];
 }
 
-#pragma mark - Table view data source
+#pragma mark - UITableViewDataSource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView  {
   return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section  {
-  // Return the number of rows in the section.
   CGFloat numberOfPlaceholders = [ScribbleThumbnailCell numberOfPlaceHolders];
   NSInteger numberOfScribbles = [self.scribbleManager numberOfScribbles];
   NSInteger numberOfRows = ceil(numberOfScribbles / numberOfPlaceholders);
@@ -54,32 +47,20 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
   static NSString *CellIdentifier = @"Cell";
-  ScribbleThumbnailCell *cell = (ScribbleThumbnailCell *)[tableView 
-                                                          dequeueReusableCellWithIdentifier:CellIdentifier];
+  ScribbleThumbnailCell *cell = (ScribbleThumbnailCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
   if (cell == nil)  {
     cell = [[ScribbleThumbnailCell alloc] initWithStyle:UITableViewCellStyleDefault
                                          reuseIdentifier:CellIdentifier];
     [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
   }
-  
-  // Configure the cell...
-  
-  // populate  thumbnails in each cell
-  
-  // get max number of thumbnail a thumbnail
-  // cell can support
+   
   NSInteger numberOfSupportedThumbnails = [ScribbleThumbnailCell numberOfPlaceHolders];
-  
-  // we can only add max numberOfSupportedThumbnails
-  // at a time in each cell
-  // e.g. numberOfSupportedThumbnails = 3
-  // thumbnail index in the scribble manager is (row index *3) +0, +1, +2
-  NSUInteger rowIndex = [indexPath row];
-  NSInteger thumbnailIndex = rowIndex *numberOfSupportedThumbnails;
+    
+  NSInteger thumbnailIndex = indexPath.row *numberOfSupportedThumbnails;
   NSInteger numberOfScribbles = [self.scribbleManager numberOfScribbles];
+    
   for (NSInteger i = 0; i < numberOfSupportedThumbnails && 
-       (thumbnailIndex + i) < numberOfScribbles; ++i)
-  {
+       (thumbnailIndex + i) < numberOfScribbles; ++i) {
     UIView *scribbleThumbnail = [self.scribbleManager scribbleThumbnailViewAtIndex:
                                             thumbnailIndex + i];
     [cell addThumbnailView:scribbleThumbnail atIndex:i];
@@ -88,12 +69,13 @@
   return cell;
 }
 
-#pragma mark -  Table view delegate
+#pragma mark - UITableViewDelegate
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
   return 150;
 }
 
+#pragma mark - event response
 - (IBAction)requestViewChangeByObject:(id)object {
     [self dismissViewControllerAnimated:YES completion:NULL];
 }
