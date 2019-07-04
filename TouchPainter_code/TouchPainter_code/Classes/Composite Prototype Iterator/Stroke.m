@@ -142,7 +142,7 @@
 #pragma mark An Extended Direct-draw Example
 
 // for a direct draw example
-- (void) drawWithContext:(CGContextRef)context {
+- (void)drawWithContext:(CGContextRef)context {
   CGContextMoveToPoint(context, self.location.x, self.location.y);
   
   for (id <Mark> mark in self.children) {

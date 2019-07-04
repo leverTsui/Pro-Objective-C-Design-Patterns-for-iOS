@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
         <deployment version="2304" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
@@ -13,7 +16,6 @@
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <customObject id="16" customClass="CoordinatingController"/>
         <view contentMode="scaleToFill" id="1">
             <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -35,7 +37,7 @@
                             <nil key="title"/>
                             <barButtonItem key="rightBarButtonItem" title="Done" style="done" id="13">
                                 <connections>
-                                    <action selector="requestViewChangeByObject:" destination="16" id="18"/>
+                                    <action selector="requestViewChangeByObject:" destination="-1" id="yAh-aM-Wy3"/>
                                 </connections>
                             </barButtonItem>
                         </navigationItem>
@@ -50,7 +52,7 @@
             <rect key="frame" x="0.0" y="0.0" width="321" height="150"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="5" id="d4T-IN-yx9">
-                <rect key="frame" x="0.0" y="0.0" width="321" height="150"/>
+                <rect key="frame" x="0.0" y="0.0" width="321" height="149.5"/>
                 <autoresizingMask key="autoresizingMask"/>
             </tableViewCellContentView>
             <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>

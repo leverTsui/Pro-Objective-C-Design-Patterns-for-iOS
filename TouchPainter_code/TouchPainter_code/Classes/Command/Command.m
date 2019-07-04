@@ -9,8 +9,7 @@
 #import "Command.h"
 
 
-@implementation Command
-@synthesize userInfo=userInfo_;
+@implementation Command 
 
 - (void) execute
 {

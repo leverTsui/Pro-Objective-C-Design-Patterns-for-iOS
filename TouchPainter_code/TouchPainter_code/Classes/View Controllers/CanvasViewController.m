@@ -9,6 +9,7 @@
 #import "CanvasViewController.h"
 #import "Dot.h"
 #import "Stroke.h"
+#import "CoordinatingController.h"
 
 @interface CanvasViewController ()
 
@@ -208,6 +209,33 @@
           withRedoInvocation:(NSInvocation *)redoInvocation {  
   [[self.undoManager prepareWithInvocationTarget:self] executeInvocation:redoInvocation withUndoInvocation:invocation];
   [invocation invoke];
+}
+
+- (IBAction)requestViewChangeByObject:(id)object {
+    switch ([(UIBarButtonItem *)object tag])
+    {
+            case kButtonTagOpenPaletteView:
+        {
+            // load a PaletteViewController
+            
+           
+            
+            PaletteViewController *controller =  [[PaletteViewController alloc] initWithNibName:@"PaletteViewController" bundle:[NSBundle mainBundle]];
+            
+            [self.navigationController presentViewController:controller animated:YES completion:NULL];
+        }
+            break;
+            case kButtonTagOpenThumbnailView:
+        {
+            // load a ThumbnailViewController
+            ThumbnailViewController *controller = [[NSBundle mainBundle] loadNibNamed:@"ThumbnailViewController" owner:self options:nil].firstObject;
+            [self.navigationController presentViewController:controller animated:YES completion:NULL];
+        }
+            break;
+            default:
+            break;
+    }
+    
 }
 
 #pragma mark - getter & setter

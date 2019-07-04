@@ -11,12 +11,11 @@
 #import "PaletteViewController.h"
 #import "ThumbnailViewController.h"
 
-typedef enum
-{
-  kButtonTagDone,
-  kButtonTagOpenPaletteView,
-  kButtonTagOpenThumbnailView
-} ButtonTag;
+typedef NS_ENUM(NSUInteger, ButtonTag) {
+    kButtonTagDone,
+    kButtonTagOpenPaletteView,
+    kButtonTagOpenThumbnailView
+}; 
 
 @interface CoordinatingController : NSObject
 
@@ -24,6 +23,6 @@ typedef enum
 
 + (CoordinatingController *) sharedInstance;
 
-- (IBAction) requestViewChangeByObject:(id)object;
+- (void)requestViewChangeByObject:(id)object;
 
 @end

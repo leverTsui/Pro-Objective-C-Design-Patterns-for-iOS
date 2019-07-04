@@ -12,19 +12,6 @@
 #import "SetStrokeColorCommand.h"
 #import "SetStrokeSizeCommand.h"
 
-@interface PaletteViewController : UIViewController 
-                                   <SetStrokeColorCommandDelegate, 
-                                    SetStrokeSizeCommandDelegate>
-{
-	@private
-	IBOutlet CommandSlider *redSlider_;
-	IBOutlet CommandSlider *greenSlider_;
-	IBOutlet CommandSlider *blueSlider_;
-	IBOutlet CommandSlider *sizeSlider_;
-	IBOutlet UIView *paletteView_;
-}
+@interface PaletteViewController : UIViewController  
 
-// slider event handler
-- (IBAction) onCommandSliderValueChanged:(CommandSlider *)slider;
-
-@end
+@end 

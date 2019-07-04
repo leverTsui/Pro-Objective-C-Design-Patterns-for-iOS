@@ -7,136 +7,117 @@
 //
 
 #import "PaletteViewController.h"
+#import "CoordinatingController.h"
+
+@interface PaletteViewController ()<SetStrokeColorCommandDelegate,SetStrokeSizeCommandDelegate>
+
+@property (nonatomic, weak) IBOutlet CommandSlider *redSlider;
+
+@property (nonatomic, weak) IBOutlet CommandSlider *greenSlider;
+
+@property (nonatomic, weak) IBOutlet CommandSlider *blueSlider;
+
+@property (nonatomic, weak) IBOutlet CommandSlider *sizeSlider;
+
+@property (nonatomic, weak) IBOutlet UIView *paletteView;
+
+@end
 
 @implementation PaletteViewController
 
-/*
-// The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil 
-{
-  if ((self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil])) 
-  {
-    // Custom initialization
+#pragma mark - life cycle
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+ 
+    SetStrokeColorCommand *colorCommand = [[SetStrokeColorCommand alloc] init];
+    colorCommand.delegate = self;
+    __weak typeof(self) weakSelf = self;
+    colorCommand.RGBValuesProvider = ^(CGFloat *red, CGFloat *green, CGFloat *blue) {
+         __strong typeof (weakSelf) strongSelf = weakSelf;
+        *red = [strongSelf.redSlider value];
+        *green = [strongSelf.greenSlider value];
+        *blue = [strongSelf.blueSlider value];
+    };
+ 
+    colorCommand.postColorUpdateProvider = ^(UIColor *color) {
+        __strong typeof (weakSelf) strongSelf = weakSelf;
+        strongSelf.paletteView.backgroundColor = color;
+    };
     
-  }
-  return self;
-}
- */
+    
+    self.redSlider.command = colorCommand;
+    self.greenSlider.command = colorCommand;
+    self.blueSlider.command = colorCommand;
 
-- (void) viewDidDisappear:(BOOL)animated
-{
-  // save the values of the sliders
-  NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-  [userDefaults setFloat:[redSlider_ value] forKey:@"red"];
-  [userDefaults setFloat:[greenSlider_ value] forKey:@"green"];
-  [userDefaults setFloat:[blueSlider_ value] forKey:@"blue"];
-  [userDefaults setFloat:[sizeSlider_ value] forKey:@"size"];
-}
+    SetStrokeSizeCommand *sizeCommand = [[SetStrokeSizeCommand alloc] init];
+    sizeCommand.delegate = self;
+    self.sizeSlider.command = sizeCommand;
 
-// Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
-- (void)viewDidLoad 
-{
-  [super viewDidLoad];
-  
-  // initialize the RGB sliders with
-  // a StrokeColorCommand
-  SetStrokeColorCommand *colorCommand = (SetStrokeColorCommand *)[redSlider_ command];
-  
-  // set each color component provider
-  // to the color command
-  [colorCommand setRGBValuesProvider: ^(CGFloat *red, CGFloat *green, CGFloat *blue)
-   {
-     *red = [redSlider_ value];
-     *green = [greenSlider_ value];
-     *blue = [blueSlider_ value];
-   }];
-  
-  // set a post-update provider to the command
-  // for any callback after a new color is set
-  [colorCommand setPostColorUpdateProvider: ^(UIColor *color) 
-   {
-     [paletteView_ setBackgroundColor:color];
-   }];
-  
-  
-  // restore the original values of the sliders
-  // and the color of the small palette view
-  NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-  CGFloat redValue = [userDefaults floatForKey:@"red"];
-  CGFloat greenValue = [userDefaults floatForKey:@"green"];
-  CGFloat blueValue = [userDefaults floatForKey:@"blue"];
-  CGFloat sizeValue = [userDefaults floatForKey:@"size"];
-  
-  [redSlider_ setValue:redValue];
-  [greenSlider_ setValue:greenValue];
-  [blueSlider_ setValue:blueValue];
-  [sizeSlider_ setValue:sizeValue];
-  
-  UIColor *color = [UIColor colorWithRed:redValue
+    // restore the original values of the sliders
+    // and the color of the small palette view
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    CGFloat redValue = [userDefaults floatForKey:@"red"];
+    CGFloat greenValue = [userDefaults floatForKey:@"green"];
+    CGFloat blueValue = [userDefaults floatForKey:@"blue"];
+    CGFloat sizeValue = [userDefaults floatForKey:@"size"];
+
+    [self.redSlider setValue:redValue];
+    [self.greenSlider setValue:greenValue];
+    [self.blueSlider setValue:blueValue];
+    [self.sizeSlider setValue:sizeValue];
+
+    UIColor *color = [UIColor colorWithRed:redValue
                                    green:greenValue
                                     blue:blueValue
                                    alpha:1.0];
-  
-  [paletteView_ setBackgroundColor:color];
+
+    [self.paletteView setBackgroundColor:color];
 }
 
-/*
- // Override to allow orientations other than the default portrait orientation.
- - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
- // Return YES for supported orientations
- return (interfaceOrientation == UIInterfaceOrientationPortrait);
- }
- */
-
-- (void)didReceiveMemoryWarning 
-{
-  // Releases the view if it doesn't have a superview.
-  [super didReceiveMemoryWarning];
-  
-  // Release any cached data, images, etc that aren't in use.
+- (void)viewDidDisappear:(BOOL)animated {
+    // save the values of the sliders
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    [userDefaults setFloat:[self.redSlider value] forKey:@"red"];
+    [userDefaults setFloat:[self.greenSlider value] forKey:@"green"];
+    [userDefaults setFloat:[self.blueSlider value] forKey:@"blue"];
+    [userDefaults setFloat:[self.sizeSlider value] forKey:@"size"];
+    [userDefaults synchronize];
 }
-
-- (void)viewDidUnload 
-{
-  [super viewDidUnload];
-  // Release any retained subviews of the main view.
-  // e.g. self.myOutlet = nil;
-} 
 
 #pragma mark -
 #pragma mark SetStrokeColorCommandDelegate methods
 
-- (void) command:(SetStrokeColorCommand *) command 
+- (void)command:(SetStrokeColorCommand *) command
                 didRequestColorComponentsForRed:(CGFloat *) red
                                           green:(CGFloat *) green 
-                                           blue:(CGFloat *) blue
-{
-  *red = [redSlider_ value];
-  *green = [greenSlider_ value];
-  *blue = [blueSlider_ value];
+                                           blue:(CGFloat *) blue {
+  *red = [self.redSlider value];
+  *green = [self.greenSlider value];
+  *blue = [self.blueSlider value];
 }
 
 - (void) command:(SetStrokeColorCommand *) command
-                didFinishColorUpdateWithColor:(UIColor *) color
-{
-  [paletteView_ setBackgroundColor:color];
+                didFinishColorUpdateWithColor:(UIColor *) color {
+  [self.paletteView setBackgroundColor:color];
 }
 
 #pragma mark SetStrokeSizeCommandDelegate method
 
 - (void) command:(SetStrokeSizeCommand *)command 
-                didRequestForStrokeSize:(CGFloat *)size
-{
-  *size = [sizeSlider_ value];
+                didRequestForStrokeSize:(CGFloat *)size {
+  *size = [self.sizeSlider value];
 }
 
 #pragma mark -
 #pragma mark Slider event handler
 
-- (IBAction) onCommandSliderValueChanged:(CommandSlider *)slider
-{
+- (IBAction)onCommandSliderValueChanged:(CommandSlider *)slider {
   [[slider command] execute];
 }
 
+- (IBAction)requestViewChangeByObject:(id)object {
+    [self dismissViewControllerAnimated:YES completion:NULL];
+}
 
 @end

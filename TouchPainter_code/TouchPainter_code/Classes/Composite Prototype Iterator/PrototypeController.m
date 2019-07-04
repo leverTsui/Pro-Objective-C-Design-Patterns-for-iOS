@@ -29,7 +29,7 @@
   
   CanvasView *canvasView;
   id <Mark> currentMark;
-  int patternIndex;
+  int patternIndex = 0;
   
   id <Mark> patternClone = [templateArray objectAtIndex:patternIndex];
   [currentMark addMark:patternClone];

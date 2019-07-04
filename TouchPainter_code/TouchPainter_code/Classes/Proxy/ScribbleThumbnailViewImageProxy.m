@@ -17,13 +17,7 @@
 
 @end
 
-
-
 @implementation ScribbleThumbnailViewImageProxy
-
-@dynamic imagePath;
-@dynamic scribblePath;
-
 
 - (Scribble *)scribble {
   if (_scribble == nil) {
@@ -32,20 +26,13 @@
     ScribbleMemento *scribbleMemento = [ScribbleMemento mementoWithData:scribbleData];
     _scribble = [Scribble scribbleWithMemento:scribbleMemento];
   }
-  
   return _scribble;
 }
 
-
-// Clients can use this method directly
-// to forward-load a real image
-// if there is no need to show this object
-// on a view.
 - (UIImage *)image {
   if (self.realImage == nil) {
     self.realImage = [[UIImage alloc] initWithContentsOfFile:self.imagePath];
   }
-  
   return self.realImage;
 }
 
@@ -58,8 +45,7 @@
 // loading process and draw a placeholder frame.
 // Once the real payload is loaded, 
 // it will redraw itself with the real one.
-- (void)drawRect:(CGRect)rect 
-{
+- (void)drawRect:(CGRect)rect {
   // if is no real image available
   // from realImageView_,
   // then just draw a blank frame
@@ -104,7 +90,6 @@
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
   [self.touchCommand execute];
 }
-
 
 #pragma mark -
 #pragma mark A private method for loading a real image in a thread

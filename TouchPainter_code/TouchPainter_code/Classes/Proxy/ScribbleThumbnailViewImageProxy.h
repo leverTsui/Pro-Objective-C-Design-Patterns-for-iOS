@@ -13,7 +13,7 @@
 
 @interface ScribbleThumbnailViewImageProxy : UIView <ScribbleSource>
 
-@property (nonatomic, retain) Command *touchCommand;
+@property (nonatomic, strong) Command *touchCommand;
 
 @property (nonatomic, strong) UIImage *image;
 @property (nonatomic, strong) Scribble *scribble;

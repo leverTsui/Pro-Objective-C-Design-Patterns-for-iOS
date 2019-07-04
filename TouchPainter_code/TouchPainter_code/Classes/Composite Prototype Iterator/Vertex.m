@@ -11,10 +11,8 @@
 
 @implementation Vertex
 
-- (id) initWithLocation:(CGPoint) aLocation
-{
-  if (self = [super init])
-  {
+- (id)initWithLocation:(CGPoint)aLocation {
+  if (self = [super init]) {
     [self setLocation:aLocation];
   }
   

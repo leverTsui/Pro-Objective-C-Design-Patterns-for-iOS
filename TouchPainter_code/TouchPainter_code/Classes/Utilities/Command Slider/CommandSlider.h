@@ -12,6 +12,6 @@
 
 @interface CommandSlider : UISlider 
 
-@property (nonatomic, retain) IBOutlet Command *command;
+@property (nonatomic, strong) Command *command;
 
 @end
