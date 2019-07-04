@@ -7,7 +7,17 @@
 //
 
 #import "ThumbnailViewController.h"
+#import "ScribbleThumbnailCell.h"
+#import "ScribbleManager.h"
+#import "CommandBarButton.h"
 
+@interface ThumbnailViewController () <UITableViewDelegate,UITableViewDataSource>
+
+@property (nonatomic, weak) IBOutlet UINavigationItem *navItem;
+
+@property (nonatomic, strong) ScribbleManager *scribbleManager;
+
+@end
 
 @implementation ThumbnailViewController
 
@@ -21,45 +31,32 @@
   [[self view] setBackgroundColor:backgroundColor];
   
   // initialize the scribble manager
-  scribbleManager_ = [[ScribbleManager alloc] init];
+  self.scribbleManager = [[ScribbleManager alloc] init];
   
   // show number of scribbles available
-  NSInteger numberOfScribbles = [scribbleManager_ numberOfScribbles];
-  [navItem_ setTitle:[NSString stringWithFormat:
-                      numberOfScribbles > 1 ? @"%d items" : @"%d item", 
-                      numberOfScribbles]];
+  NSInteger numberOfScribbles = [self.scribbleManager numberOfScribbles];
+  [self.navItem setTitle:[NSString stringWithFormat:numberOfScribbles > 1 ? @"%ld items" : @"%ld item", numberOfScribbles]];
 }
 
-#pragma mark -
-#pragma mark Table view data source
+#pragma mark - Table view data source
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView 
-{
-  // Return the number of sections.
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView  {
   return 1;
 }
 
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section 
-{
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section  {
   // Return the number of rows in the section.
   CGFloat numberOfPlaceholders = [ScribbleThumbnailCell numberOfPlaceHolders];
-  NSInteger numberOfScribbles = [scribbleManager_ numberOfScribbles];
+  NSInteger numberOfScribbles = [self.scribbleManager numberOfScribbles];
   NSInteger numberOfRows = ceil(numberOfScribbles / numberOfPlaceholders);
   return numberOfRows;
 }
 
-
-// Customize the appearance of table view cells.
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath 
-{
-  
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
   static NSString *CellIdentifier = @"Cell";
-  
   ScribbleThumbnailCell *cell = (ScribbleThumbnailCell *)[tableView 
                                                           dequeueReusableCellWithIdentifier:CellIdentifier];
-  if (cell == nil) 
-  {
+  if (cell == nil)  {
     cell = [[ScribbleThumbnailCell alloc] initWithStyle:UITableViewCellStyleDefault
                                          reuseIdentifier:CellIdentifier];
     [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
@@ -79,11 +76,11 @@
   // thumbnail index in the scribble manager is (row index *3) +0, +1, +2
   NSUInteger rowIndex = [indexPath row];
   NSInteger thumbnailIndex = rowIndex *numberOfSupportedThumbnails;
-  NSInteger numberOfScribbles = [scribbleManager_ numberOfScribbles];
+  NSInteger numberOfScribbles = [self.scribbleManager numberOfScribbles];
   for (NSInteger i = 0; i < numberOfSupportedThumbnails && 
        (thumbnailIndex + i) < numberOfScribbles; ++i)
   {
-    UIView *scribbleThumbnail = [scribbleManager_ scribbleThumbnailViewAtIndex:
+    UIView *scribbleThumbnail = [self.scribbleManager scribbleThumbnailViewAtIndex:
                                             thumbnailIndex + i];
     [cell addThumbnailView:scribbleThumbnail atIndex:i];
   }

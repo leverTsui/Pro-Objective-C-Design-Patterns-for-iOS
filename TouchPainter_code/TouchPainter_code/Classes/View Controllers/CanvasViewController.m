@@ -230,7 +230,6 @@
         default:
         break;
     }
-    
 }
 
 #pragma mark - getter & setter

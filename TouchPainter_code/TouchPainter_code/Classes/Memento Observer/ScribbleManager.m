@@ -66,32 +66,32 @@
 }
 
 - (UIView *)scribbleThumbnailViewAtIndex:(NSInteger)index {
-  ScribbleThumbnailViewImageProxy *loadedScribbleThumbnail = nil;
-  NSArray *scribbleThumbnailPathsArray = [self scribbleThumbnailPaths];
-  NSArray *scribblePathsArray = [self scribbleDataPaths];
-  
-  // load scribble thumbnail from the path indicated
-  // by the index
-  NSString *scribbleThumbnailPath = [scribbleThumbnailPathsArray objectAtIndex:index];
-  NSString *scribblePath = [scribblePathsArray objectAtIndex:index];
-  
-  if (scribbleThumbnailPath) {
-    // initialize an instance of ScribbleThumbnailProxy
-    // with the exact location of the thumbnail in the file system
-    loadedScribbleThumbnail = [[ScribbleThumbnailViewImageProxy alloc] init];
-    
-    loadedScribbleThumbnail.imagePath = [kScribbleThumbnailPath stringByAppendingPathComponent:scribbleThumbnailPath];
-    loadedScribbleThumbnail.scribblePath = [kScribbleDataPath stringByAppendingPathComponent:scribblePath];
-    
-    
-    // assign a touch command to the scribble thumbnail
-    // so it can be used to open a scribble by touch
-    OpenScribbleCommand *touchCommand = [[OpenScribbleCommand alloc] 
+    ScribbleThumbnailViewImageProxy *loadedScribbleThumbnail = nil;
+    NSArray *scribbleThumbnailPathsArray = [self scribbleThumbnailPaths];
+    NSArray *scribblePathsArray = [self scribbleDataPaths];
+
+    // load scribble thumbnail from the path indicated
+    // by the index
+    NSString *scribbleThumbnailPath = [scribbleThumbnailPathsArray objectAtIndex:index];
+    NSString *scribblePath = [scribblePathsArray objectAtIndex:index];
+
+    if (scribbleThumbnailPath) {
+        // initialize an instance of ScribbleThumbnailProxy
+        // with the exact location of the thumbnail in the file system
+        loadedScribbleThumbnail = [[ScribbleThumbnailViewImageProxy alloc] init];
+
+        loadedScribbleThumbnail.imagePath = [kScribbleThumbnailPath stringByAppendingPathComponent:scribbleThumbnailPath];
+        loadedScribbleThumbnail.scribblePath = [kScribbleDataPath stringByAppendingPathComponent:scribblePath];
+
+
+        // assign a touch command to the scribble thumbnail
+        // so it can be used to open a scribble by touch
+        OpenScribbleCommand *touchCommand = [[OpenScribbleCommand alloc]
                                           initWithScribbleSource:loadedScribbleThumbnail];
-      loadedScribbleThumbnail.touchCommand = touchCommand;
-  }
-  
-  return loadedScribbleThumbnail;
+        loadedScribbleThumbnail.touchCommand = touchCommand;
+    }
+
+    return loadedScribbleThumbnail;
 }
 
 #pragma mark - Private Methods
