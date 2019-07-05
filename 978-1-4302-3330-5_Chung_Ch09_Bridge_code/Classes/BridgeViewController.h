@@ -8,9 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface BridgeViewController : UIViewController {
-
-}
+@interface BridgeViewController : UIViewController  
 
 @end
 
