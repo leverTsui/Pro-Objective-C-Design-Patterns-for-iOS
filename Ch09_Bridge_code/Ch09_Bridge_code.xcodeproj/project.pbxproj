@@ -165,12 +165,12 @@
 		E579308F22CEE9DC008DAC8F /* Emulator */ = {
 			isa = PBXGroup;
 			children = (
-				E579309022CEE9DC008DAC8F /* GameGearEmulator.m */,
 				E579309122CEE9DC008DAC8F /* ConsoleEmulator.h */,
-				E579309222CEE9DC008DAC8F /* GameBoyEmulator.m */,
 				E579309322CEE9DC008DAC8F /* ConsoleEmulator.m */,
-				E579309422CEE9DC008DAC8F /* GameGearEmulator.h */,
 				E579309522CEE9DC008DAC8F /* GameBoyEmulator.h */,
+				E579309222CEE9DC008DAC8F /* GameBoyEmulator.m */,
+				E579309422CEE9DC008DAC8F /* GameGearEmulator.h */,
+				E579309022CEE9DC008DAC8F /* GameGearEmulator.m */,
 			);
 			path = Emulator;
 			sourceTree = "<group>";
