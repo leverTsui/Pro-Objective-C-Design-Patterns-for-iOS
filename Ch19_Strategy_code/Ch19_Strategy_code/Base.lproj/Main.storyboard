@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Numeric Value Only" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="V3V-hL-j1G" customClass="CustomTextField">
+                                <rect key="frame" x="132" y="428" width="150" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="150" id="p1t-sr-mvP"/>
+                                    <constraint firstAttribute="height" constant="40" id="zUa-VM-hbX"/>
+                                </constraints>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="jqV-9F-7xY"/>
+                                    <outlet property="inputValidator" destination="fl3-l3-aDI" id="e7Q-Rp-m3h"/>
+                                </connections>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Alpha Value Only" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3oS-Qx-MBV" customClass="CustomTextField">
+                                <rect key="frame" x="132" y="314" width="150" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="150" id="CQD-da-ff0"/>
+                                    <constraint firstAttribute="height" constant="40" id="fU1-wl-sfe"/>
+                                </constraints>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="cLY-UF-pjZ"/>
+                                    <outlet property="inputValidator" destination="4GK-E8-doG" id="XlR-n6-wh8"/>
+                                </connections>
+                            </textField>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="V3V-hL-j1G" firstAttribute="top" secondItem="3oS-Qx-MBV" secondAttribute="bottom" constant="74" id="CnH-TN-Ygm"/>
+                            <constraint firstItem="3oS-Qx-MBV" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="K7b-Yw-uUA"/>
+                            <constraint firstItem="V3V-hL-j1G" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="X6X-7f-xEa"/>
+                            <constraint firstItem="V3V-hL-j1G" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="lYx-7o-sSQ"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                    </view>
+                    <connections>
+                        <outlet property="alphaTextField" destination="3oS-Qx-MBV" id="OwH-dc-SFN"/>
+                        <outlet property="numericTextField" destination="V3V-hL-j1G" id="8Rb-Sb-JIh"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <customObject id="4GK-E8-doG" customClass="AlphaInputValidator"/>
+                <customObject id="fl3-l3-aDI" customClass="NumericInputValidator"/>
+            </objects>
+        </scene>
+    </scenes>
+</document>
